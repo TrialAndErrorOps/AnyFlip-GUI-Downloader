@@ -13,10 +13,11 @@ You can either download the .ps1 file, then run it from a powershell window, or 
 
 You do NOT need admin permissions. You do NOT need to change bypass policy to Unrestricted.
 
-You do need to have remotesigned for the execution policy
+You do need to have remotesigned for the execution policy if you are running the .ps1 script
 ```PowerShell
 set-executionpolicy remotesigned -scope process
 ```
+You do NOT need to do anything if you are running the EXE. You can have execution policy set to restricted and it will still run just fine.
 
 By default Lofter1's downloader is installed to your user\appdata\local\anyflip-downloader folder. The script looks for that folder and will automatically install Lofter1's AnyFlip Downloader as part of the "Download PDF" process if you don't already have the tool installed.
 
