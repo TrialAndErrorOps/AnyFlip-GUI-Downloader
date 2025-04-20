@@ -37,6 +37,8 @@ By default Lofter1's downloader is installed to your user\appdata\local\anyflip-
 
 5: Click on "Download PDF" and it will download. I preserved Lofter1's normal progress log, as well as added a custom progress bar.
 
+![image](https://github.com/user-attachments/assets/0373effe-843d-40ab-83d0-f27f06743b73)
+
 6: Since people had difficulty finding the file, the script will scan the folder you launched it from for the file you just downloaded, then present you with a dialogue box asking if you want to open it now or not.
 
 ![image](https://github.com/user-attachments/assets/56217ccd-14dd-4420-99a4-56645bb3ed0f)
