@@ -5,6 +5,8 @@
 
 Only use this tool to download books that officially allow PDFs to be downloaded.
 
+## Background
+
 I found Lofter1's script when trying to find a better way to download AnyFlip PDFs, saw  the confusion about how to use it on Reddit and other places, so I decided to write a GUI for it. It's pretty self explanatory and doesn't involve needing to clone or download anything additional yourself.
 
 You can either download the .ps1 file, then run it from a powershell window, or you can download the .exe and run it. Don't trust random EXEs you find online, but this is just packaged with PS2EXE in case you don't have the technical aptitude to download and run a .ps1 file.
@@ -17,6 +19,8 @@ set-executionpolicy remotesigned -scope process
 ```
 
 By default Lofter1's downloader is installed to your user\appdata\local\anyflip-downloader folder. The script looks for that folder and will automatically install Lofter1's AnyFlip Downloader as part of the "Download PDF" process if you don't already have the tool installed.
+
+## How to use this tool
 
 1: Put in the URL of the AnyFlip PDF you'd like to download.
 
