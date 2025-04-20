@@ -20,6 +20,11 @@ set-executionpolicy remotesigned -scope process
 
 By default Lofter1's downloader is installed to your user\appdata\local\anyflip-downloader folder. The script looks for that folder and will automatically install Lofter1's AnyFlip Downloader as part of the "Download PDF" process if you don't already have the tool installed.
 
+![image](https://github.com/user-attachments/assets/98317644-24cc-4f06-8e16-cdcaa1f197c3)
+
+![image](https://github.com/user-attachments/assets/76a45a24-98ab-4e01-95d8-3641e6b812f7)
+
+
 ## How to use this tool
 
 1: Put in the URL of the AnyFlip PDF you'd like to download.
@@ -33,6 +38,9 @@ By default Lofter1's downloader is installed to your user\appdata\local\anyflip-
 5: Click on "Download PDF" and it will download. I preserved Lofter1's normal progress log, as well as added a custom progress bar.
 
 6: Since people had difficulty finding the file, the script will scan the folder you launched it from for the file you just downloaded, then present you with a dialogue box asking if you want to open it now or not.
+
+![image](https://github.com/user-attachments/assets/56217ccd-14dd-4420-99a4-56645bb3ed0f)
+
 
 That's it. Enjoy your AnyFlip PDF.
 
