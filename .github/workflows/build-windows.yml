@@ -1,6 +1,8 @@
 name: Build Windows app
 
 on:
+  push:
+    branches: [feature/fluent-wpf-rebuild]
   pull_request:
     branches: [main]
   workflow_dispatch:
