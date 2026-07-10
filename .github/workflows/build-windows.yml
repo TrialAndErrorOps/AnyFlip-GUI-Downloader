@@ -31,9 +31,8 @@ jobs:
           $extract = Join-Path $env:RUNNER_TEMP 'anyflip-downloader'
           $tools = Join-Path $PWD 'src\AnyFlipDownloader\Tools'
 
-          Invoke-WebRequest \
-            "https://github.com/Lofter1/anyflip-downloader/releases/download/v$version/anyflip-downloader_${version}_windows_amd64.tar.gz" \
-            -OutFile $archive
+          $releaseUrl = "https://github.com/Lofter1/anyflip-downloader/releases/download/v$version/anyflip-downloader_${version}_windows_amd64.tar.gz"
+          Invoke-WebRequest $releaseUrl -OutFile $archive
 
           $actualHash = (Get-FileHash $archive -Algorithm SHA256).Hash.ToLowerInvariant()
           if ($actualHash -ne $expectedHash) {
@@ -51,12 +50,7 @@ jobs:
 
       - name: Publish self-contained executable
         shell: pwsh
-        run: |
-          dotnet publish .\src\AnyFlipDownloader\AnyFlipDownloader.csproj \
-            --configuration Release \
-            --runtime win-x64 \
-            --self-contained true \
-            --output .\publish
+        run: dotnet publish .\src\AnyFlipDownloader\AnyFlipDownloader.csproj --configuration Release --runtime win-x64 --self-contained true --output .\publish
 
       - name: Assemble redistributable package
         shell: pwsh
@@ -66,12 +60,8 @@ jobs:
           Copy-Item .\publish\AnyFlipDownloader.exe .\package\AnyFlipDownloader.exe
           Copy-Item .\THIRD-PARTY-NOTICES.txt .\package\THIRD-PARTY-NOTICES.txt
 
-          Invoke-WebRequest \
-            'https://github.com/Lofter1/anyflip-downloader/archive/refs/tags/v0.1.14.zip' \
-            -OutFile .\package\anyflip-downloader-v0.1.14-source.zip
-          Invoke-WebRequest \
-            'https://raw.githubusercontent.com/Lofter1/anyflip-downloader/v0.1.14/LICENSE' \
-            -OutFile .\package\GPL-3.0-anyflip-downloader.txt
+          Invoke-WebRequest 'https://github.com/Lofter1/anyflip-downloader/archive/refs/tags/v0.1.14.zip' -OutFile .\package\anyflip-downloader-v0.1.14-source.zip
+          Invoke-WebRequest 'https://raw.githubusercontent.com/Lofter1/anyflip-downloader/v0.1.14/LICENSE' -OutFile .\package\GPL-3.0-anyflip-downloader.txt
 
           Get-ChildItem .\package -File | Sort-Object Name | ForEach-Object {
             $hash = (Get-FileHash $_.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
