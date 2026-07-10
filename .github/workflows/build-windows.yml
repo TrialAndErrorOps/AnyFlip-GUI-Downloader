@@ -50,7 +50,9 @@ jobs:
 
       - name: Publish self-contained executable
         shell: pwsh
-        run: dotnet publish .\src\AnyFlipDownloader\AnyFlipDownloader.csproj --configuration Release --runtime win-x64 --self-contained true --output .\publish
+        run: |
+          dotnet publish .\src\AnyFlipDownloader\AnyFlipDownloader.csproj --configuration Release --runtime win-x64 --self-contained true --output .\publish *>&1 | Tee-Object -FilePath .\build.log
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
       - name: Assemble redistributable package
         shell: pwsh
@@ -75,3 +77,11 @@ jobs:
           path: package/*
           if-no-files-found: error
           compression-level: 6
+
+      - name: Upload build log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: AnyFlipDownloader-build-log
+          path: build.log
+          if-no-files-found: warn
