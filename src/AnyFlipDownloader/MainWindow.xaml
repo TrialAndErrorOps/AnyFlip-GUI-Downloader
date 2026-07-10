@@ -1,0 +1,167 @@
+<Window x:Class="AnyFlipDownloader.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="AnyFlip Downloader"
+        Width="820"
+        Height="760"
+        MinWidth="680"
+        MinHeight="620"
+        WindowStartupLocation="CenterScreen"
+        UseLayoutRounding="True"
+        SnapsToDevicePixels="True"
+        Closing="OnClosing">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid MaxWidth="760" Margin="28">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="18" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="14" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="14" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="18" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="14" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Border Width="46" Height="46" CornerRadius="12"
+                        Background="{DynamicResource {x:Static SystemColors.AccentColorBrushKey}}">
+                    <TextBlock Text="↓" Foreground="White" FontSize="28" FontWeight="SemiBold"
+                               HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-3,0,0" />
+                </Border>
+
+                <StackPanel Grid.Column="2" VerticalAlignment="Center">
+                    <TextBlock Text="AnyFlip Downloader" FontSize="24" FontWeight="SemiBold" />
+                    <TextBlock Text="Save an allowed AnyFlip publication as a PDF." Style="{StaticResource MutedTextStyle}" Margin="0,3,0,0" />
+                </StackPanel>
+
+                <Border Grid.Column="3" VerticalAlignment="Center" Padding="10,5" CornerRadius="10"
+                        BorderBrush="{DynamicResource {x:Static SystemColors.InactiveBorderBrushKey}}" BorderThickness="1">
+                    <TextBlock Text="CLI v0.1.14 bundled" FontSize="12" />
+                </Border>
+            </Grid>
+
+            <Border Grid.Row="2" Style="{StaticResource CardStyle}">
+                <StackPanel>
+                    <TextBlock Text="Publication" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,18" />
+
+                    <TextBlock Text="AnyFlip URL" Style="{StaticResource FieldLabelStyle}" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="10" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="UrlTextBox" MinHeight="38" VerticalContentAlignment="Center"
+                                 ToolTip="Example: https://anyflip.com/abcd/efgh/" />
+                        <Button Grid.Column="2" Content="Paste" MinWidth="82" Click="Paste_Click" />
+                    </Grid>
+
+                    <TextBlock Text="Save to" Style="{StaticResource FieldLabelStyle}" Margin="0,18,0,6" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="10" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="OutputFolderTextBox" MinHeight="38" VerticalContentAlignment="Center" />
+                        <Button Grid.Column="2" Content="Browse…" MinWidth="82" Click="Browse_Click" />
+                    </Grid>
+
+                    <TextBlock Text="PDF title (optional)" Style="{StaticResource FieldLabelStyle}" Margin="0,18,0,6" />
+                    <TextBox x:Name="TitleTextBox" MinHeight="38" VerticalContentAlignment="Center"
+                             ToolTip="Leave blank to use the publication title." />
+
+                    <Expander Header="Advanced settings" Margin="0,18,0,0">
+                        <Grid Margin="0,14,0,2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="18" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <TextBlock Text="Threads" Style="{StaticResource FieldLabelStyle}" />
+                                <TextBox x:Name="ThreadsTextBox" Text="4" MinHeight="36" VerticalContentAlignment="Center" />
+                                <TextBlock Text="1–32 simultaneous workers" Style="{StaticResource MutedTextStyle}" FontSize="12" Margin="0,5,0,0" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="2">
+                                <TextBlock Text="Chunk size" Style="{StaticResource FieldLabelStyle}" />
+                                <TextBox x:Name="ChunkSizeTextBox" Text="10" MinHeight="36" VerticalContentAlignment="Center" />
+                                <TextBlock Text="1–1000 pages per chunk" Style="{StaticResource MutedTextStyle}" FontSize="12" Margin="0,5,0,0" />
+                            </StackPanel>
+                        </Grid>
+                    </Expander>
+
+                    <Grid Margin="0,22,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="10" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="10" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="DownloadButton" Content="Download PDF" Style="{StaticResource PrimaryButtonStyle}"
+                                Click="Download_Click" MinWidth="145" />
+                        <Button x:Name="CancelButton" Grid.Column="2" Content="Cancel" Click="Cancel_Click"
+                                IsEnabled="False" MinWidth="90" />
+                        <Button x:Name="OpenPdfButton" Grid.Column="4" Content="Open PDF" Click="OpenPdf_Click"
+                                Visibility="Collapsed" />
+                        <Button x:Name="OpenFolderButton" Grid.Column="6" Content="Open folder" Click="OpenFolder_Click"
+                                Visibility="Collapsed" />
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Row="4" Style="{StaticResource CardStyle}">
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel>
+                            <TextBlock x:Name="StageTextBlock" Text="Ready" FontSize="17" FontWeight="SemiBold" />
+                            <TextBlock x:Name="DetailTextBlock" Text="Paste a publication URL to begin."
+                                       Style="{StaticResource MutedTextStyle}" Margin="0,4,0,0" TextWrapping="Wrap" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" HorizontalAlignment="Right">
+                            <TextBlock x:Name="PercentTextBlock" Text="0%" FontSize="20" FontWeight="SemiBold" HorizontalAlignment="Right" />
+                            <TextBlock x:Name="ElapsedTextBlock" Text="00:00" Style="{StaticResource MutedTextStyle}" HorizontalAlignment="Right" />
+                        </StackPanel>
+                    </Grid>
+                    <ProgressBar x:Name="DownloadProgressBar" Minimum="0" Maximum="100" Value="0" Height="8" Margin="0,18,0,0" />
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Row="6" Style="{StaticResource CardStyle}">
+                <Expander x:Name="ActivityExpander" Header="Activity">
+                    <Grid Margin="0,14,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="10" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <TextBox x:Name="ActivityTextBox" Height="150" IsReadOnly="True" AcceptsReturn="True"
+                                 TextWrapping="NoWrap" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+                                 FontFamily="Consolas" FontSize="12" />
+                        <Button Grid.Row="2" Content="Clear" HorizontalAlignment="Right" Click="ClearActivity_Click" />
+                    </Grid>
+                </Expander>
+            </Border>
+
+            <TextBlock Grid.Row="8" TextWrapping="Wrap" TextAlignment="Center"
+                       Style="{StaticResource MutedTextStyle}" FontSize="12"
+                       Text="Use only for publications you own or are authorized to download. The bundled command-line tool is licensed under GPL-3.0." />
+        </Grid>
+    </ScrollViewer>
+</Window>
