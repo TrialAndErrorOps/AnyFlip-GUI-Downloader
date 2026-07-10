@@ -1,0 +1,77 @@
+name: Build Windows app
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Install .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.315
+
+      - name: Verify and bundle anyflip-downloader v0.1.14
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $version = '0.1.14'
+          $expectedHash = '91d514615c8e07600bf6f98870620456263a6a7f7d5d36724f16a86702fbd0c7'
+          $archive = Join-Path $env:RUNNER_TEMP 'anyflip-downloader.tar.gz'
+          $extract = Join-Path $env:RUNNER_TEMP 'anyflip-downloader'
+          $tools = Join-Path $PWD 'src\AnyFlipDownloader\Tools'
+
+          $releaseUrl = "https://github.com/Lofter1/anyflip-downloader/releases/download/v$version/anyflip-downloader_${version}_windows_amd64.tar.gz"
+          Invoke-WebRequest $releaseUrl -OutFile $archive
+
+          $actualHash = (Get-FileHash $archive -Algorithm SHA256).Hash.ToLowerInvariant()
+          if ($actualHash -ne $expectedHash) {
+            throw "CLI archive checksum mismatch. Expected $expectedHash; received $actualHash."
+          }
+
+          New-Item -ItemType Directory -Force -Path $extract, $tools | Out-Null
+          tar.exe -xzf $archive -C $extract
+          $cli = Get-ChildItem $extract -Recurse -Filter 'anyflip-downloader.exe' | Select-Object -First 1
+          if (-not $cli) {
+            throw 'The CLI executable was not present in the verified release archive.'
+          }
+
+          Copy-Item $cli.FullName (Join-Path $tools 'anyflip-downloader.exe') -Force
+
+      - name: Publish self-contained executable
+        shell: pwsh
+        run: dotnet publish .\src\AnyFlipDownloader\AnyFlipDownloader.csproj --configuration Release --runtime win-x64 --self-contained true --output .\publish
+
+      - name: Assemble redistributable package
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          New-Item -ItemType Directory -Force -Path .\package | Out-Null
+          Copy-Item .\publish\AnyFlipDownloader.exe .\package\AnyFlipDownloader.exe
+          Copy-Item .\THIRD-PARTY-NOTICES.txt .\package\THIRD-PARTY-NOTICES.txt
+
+          Invoke-WebRequest 'https://github.com/Lofter1/anyflip-downloader/archive/refs/tags/v0.1.14.zip' -OutFile .\package\anyflip-downloader-v0.1.14-source.zip
+          Invoke-WebRequest 'https://raw.githubusercontent.com/Lofter1/anyflip-downloader/v0.1.14/LICENSE' -OutFile .\package\GPL-3.0-anyflip-downloader.txt
+
+          Get-ChildItem .\package -File | Sort-Object Name | ForEach-Object {
+            $hash = (Get-FileHash $_.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+            "$hash  $($_.Name)"
+          } | Set-Content .\package\SHA256SUMS.txt -Encoding ascii
+
+      - name: Upload Windows package
+        uses: actions/upload-artifact@v4
+        with:
+          name: AnyFlipDownloader-win-x64
+          path: package/*
+          if-no-files-found: error
+          compression-level: 6
