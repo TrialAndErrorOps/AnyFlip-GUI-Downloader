@@ -4,9 +4,9 @@
         Title="AnyFlip Downloader GUI"
         Icon="Assets/App.ico"
         Width="920"
-        Height="680"
+        Height="720"
         MinWidth="820"
-        MinHeight="640"
+        MinHeight="680"
         WindowStartupLocation="CenterScreen"
         Background="{StaticResource AppBackgroundBrush}"
         UseLayoutRounding="True"
@@ -20,6 +20,7 @@
             <Setter Property="Padding" Value="0" />
             <Setter Property="Background" Value="{StaticResource AccentSoftBrush}" />
             <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}" />
+            <Setter Property="Foreground" Value="{StaticResource AccentBrush}" />
             <Setter Property="FontSize" Value="16" />
             <Setter Property="Template">
                 <Setter.Value>
@@ -31,13 +32,12 @@
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}">
-                            <ContentPresenter HorizontalAlignment="Center"
-                                              VerticalAlignment="Center" />
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter TargetName="Circle" Property="Background" Value="{StaticResource AccentBrush}" />
-                                <Setter TargetName="Circle" Property="BorderBrush" Value="#AFC7FF" />
+                                <Setter Property="Foreground" Value="White" />
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
                                 <Setter TargetName="Circle" Property="Opacity" Value="0.75" />
@@ -83,32 +83,31 @@
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Top">
                             <StackPanel Margin="4,6,4,4">
-                                <Border Height="2" CornerRadius="1" Background="#6B7FD0" />
-                                <Border Height="2" CornerRadius="1" Background="#6B7FD0" Margin="0,3,0,0" />
-                                <Border Width="7" Height="2" CornerRadius="1" Background="#6B7FD0" Margin="0,3,0,0" HorizontalAlignment="Left" />
+                                <Border Height="2" CornerRadius="1" Background="#6D5DFB" />
+                                <Border Height="2" CornerRadius="1" Background="#6D5DFB" Margin="0,3,0,0" />
+                                <Border Width="7" Height="2" CornerRadius="1" Background="#6D5DFB" Margin="0,3,0,0" HorizontalAlignment="Left" />
                             </StackPanel>
                         </Border>
                     </Grid>
                 </Border>
 
-                <StackPanel Grid.Column="2" VerticalAlignment="Center">
-                    <TextBlock Text="AnyFlip Downloader GUI" FontSize="23" FontWeight="SemiBold" />
-                    <TextBlock Text="Create a PDF from an authorized AnyFlip publication."
-                               Style="{StaticResource MutedTextStyle}"
-                               Margin="0,2,0,0" />
-                </StackPanel>
+                <TextBlock Grid.Column="2"
+                           Text="AnyFlip Downloader GUI"
+                           FontSize="23"
+                           FontWeight="SemiBold"
+                           VerticalAlignment="Center" />
 
                 <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center">
                     <Border VerticalAlignment="Center"
-                            Background="{StaticResource SurfaceElevatedBrush}"
-                            BorderBrush="{StaticResource BorderStrongBrush}"
+                            Background="White"
+                            BorderBrush="{StaticResource BorderBrush}"
                             BorderThickness="1"
                             CornerRadius="10"
                             Padding="11,6"
                             Margin="0,0,10,0">
                         <StackPanel Orientation="Horizontal">
                             <Ellipse Width="7" Height="7" Fill="{StaticResource SuccessBrush}" Margin="0,0,7,0" VerticalAlignment="Center" />
-                            <TextBlock Text="Lofter1  •  CLI 0.1.14  •  Build 1.3.0"
+                            <TextBlock Text="Lofter1  •  CLI 0.1.14"
                                        FontSize="11.5"
                                        FontWeight="SemiBold"
                                        VerticalAlignment="Center" />
@@ -123,8 +122,8 @@
             </Grid>
 
             <Border Grid.Row="2"
-                    Background="{StaticResource SurfaceElevatedBrush}"
-                    BorderBrush="{StaticResource BorderStrongBrush}"
+                    Background="White"
+                    BorderBrush="{StaticResource BorderBrush}"
                     BorderThickness="1"
                     CornerRadius="14"
                     Padding="18,16">
@@ -154,7 +153,7 @@
                                        TextWrapping="NoWrap" />
                         </StackPanel>
                         <StackPanel Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="18,0,0,0">
-                            <TextBlock x:Name="PercentTextBlock" Text="0%" FontSize="22" FontWeight="SemiBold" HorizontalAlignment="Right" />
+                            <TextBlock x:Name="PercentTextBlock" Text="0%" FontSize="22" FontWeight="SemiBold" Foreground="{StaticResource AccentBrush}" HorizontalAlignment="Right" />
                             <TextBlock x:Name="ElapsedTextBlock" Text="00:00" Style="{StaticResource QuietTextStyle}" HorizontalAlignment="Right" Margin="0,2,0,0" />
                         </StackPanel>
                     </Grid>
@@ -264,25 +263,30 @@
 
                     <Grid Grid.Row="6">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="18" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
 
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                            <StackPanel Margin="0,0,12,0">
-                                <TextBlock Text="Performance" FontWeight="SemiBold" FontSize="13" />
-                                <TextBlock Text="Defaults suit most books" Style="{StaticResource QuietTextStyle}" FontSize="11.5" Margin="0,2,0,0" />
-                            </StackPanel>
-                            <StackPanel Margin="0,0,10,0">
-                                <TextBlock Text="Threads" Style="{StaticResource QuietTextStyle}" FontSize="11.5" Margin="0,0,0,4" />
-                                <TextBox x:Name="ThreadsTextBox" Text="4" Width="58" AutomationProperties.Name="Download threads" />
-                            </StackPanel>
-                            <StackPanel>
-                                <TextBlock Text="Chunk size" Style="{StaticResource QuietTextStyle}" FontSize="11.5" Margin="0,0,0,4" />
-                                <TextBox x:Name="ChunkSizeTextBox" Text="10" Width="68" AutomationProperties.Name="PDF chunk size" />
-                            </StackPanel>
-                        </StackPanel>
+                        <Expander Header="Advanced settings" VerticalAlignment="Bottom">
+                            <Grid Width="350">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="14" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock Text="Threads" Style="{StaticResource FieldLabelStyle}" />
+                                    <TextBox x:Name="ThreadsTextBox" Text="4" AutomationProperties.Name="Download threads" />
+                                    <TextBlock Text="1–32 simultaneous workers" Style="{StaticResource QuietTextStyle}" FontSize="11.5" Margin="0,5,0,0" />
+                                </StackPanel>
+                                <StackPanel Grid.Column="2">
+                                    <TextBlock Text="Chunk size" Style="{StaticResource FieldLabelStyle}" />
+                                    <TextBox x:Name="ChunkSizeTextBox" Text="10" AutomationProperties.Name="PDF chunk size" />
+                                    <TextBlock Text="1–1000 pages per chunk" Style="{StaticResource QuietTextStyle}" FontSize="11.5" Margin="0,5,0,0" />
+                                </StackPanel>
+                            </Grid>
+                        </Expander>
 
                         <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Bottom">
                             <Button x:Name="OpenPdfButton"
@@ -328,19 +332,19 @@
             </Grid>
         </Grid>
 
-        <!-- Retained only so existing internal diagnostics code has no UI impact. -->
+        <!-- Internal diagnostics remain hidden so errors can still include useful CLI details. -->
         <Expander x:Name="ActivityExpander" Visibility="Collapsed">
             <TextBox x:Name="ActivityTextBox" />
         </Expander>
 
         <Grid x:Name="AboutOverlay"
               Visibility="Collapsed"
-              Background="#B80B1016"
+              Background="#66000000"
               Panel.ZIndex="100">
             <Border Width="470"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Background="{StaticResource SurfaceElevatedBrush}"
+                    Background="White"
                     BorderBrush="{StaticResource BorderStrongBrush}"
                     BorderThickness="1"
                     CornerRadius="18"
@@ -361,17 +365,20 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Border Width="42" Height="42" CornerRadius="21" Background="{StaticResource AccentSoftBrush}" BorderBrush="{StaticResource AccentBrush}" BorderThickness="1">
-                            <TextBlock Text="?" FontSize="19" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <TextBlock Text="?" FontSize="19" FontWeight="SemiBold" Foreground="{StaticResource AccentBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
-                        <StackPanel Grid.Column="2" VerticalAlignment="Center">
-                            <TextBlock Text="About AnyFlip Downloader GUI" FontSize="20" FontWeight="SemiBold" />
-                            <TextBlock Text="GUI build 1.3.0" Style="{StaticResource QuietTextStyle}" Margin="0,3,0,0" />
-                        </StackPanel>
+                        <TextBlock Grid.Column="2"
+                                   Text="About AnyFlip Downloader GUI"
+                                   FontSize="20"
+                                   FontWeight="SemiBold"
+                                   VerticalAlignment="Center" />
                     </Grid>
 
                     <StackPanel Grid.Row="2">
-                        <TextBlock Text="This graphical interface packages and drives Lofter1's anyflip-downloader command-line project." TextWrapping="Wrap" LineHeight="21" />
-                        <Border Background="{StaticResource SuccessSoftBrush}" BorderBrush="#3D8067" BorderThickness="1" CornerRadius="10" Padding="14,11" Margin="0,16,0,0">
+                        <TextBlock Text="This graphical interface packages and drives Lofter1's anyflip-downloader command-line project."
+                                   TextWrapping="Wrap"
+                                   LineHeight="21" />
+                        <Border Background="{StaticResource SuccessSoftBrush}" BorderBrush="#B9E3D2" BorderThickness="1" CornerRadius="10" Padding="14,11" Margin="0,16,0,0">
                             <StackPanel>
                                 <TextBlock Text="Download engine credit" FontWeight="SemiBold" Foreground="{StaticResource SuccessBrush}" />
                                 <TextBlock Text="Lofter1 — anyflip-downloader CLI v0.1.14" Margin="0,4,0,0" />
