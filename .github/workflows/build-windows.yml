@@ -16,6 +16,30 @@ jobs:
       - name: Check out source
         uses: actions/checkout@v4
 
+      - name: Assemble source package
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $sourceName = 'AnyFlipDownloader-source-v1.4.0'
+          $sourceRoot = Join-Path $env:RUNNER_TEMP $sourceName
+          $sourceZip = "$sourceRoot.zip"
+
+          New-Item -ItemType Directory -Force -Path $sourceRoot | Out-Null
+          Get-ChildItem -Force | Where-Object Name -ne '.git' | ForEach-Object {
+            Copy-Item -LiteralPath $_.FullName -Destination $sourceRoot -Recurse -Force
+          }
+
+          Compress-Archive -Path $sourceRoot -DestinationPath $sourceZip -CompressionLevel Optimal
+          "SOURCE_ZIP=$sourceZip" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+
+      - name: Upload source package
+        uses: actions/upload-artifact@v4
+        with:
+          name: AnyFlipDownloader-source-v1.4.0
+          path: ${{ env.SOURCE_ZIP }}
+          if-no-files-found: error
+          compression-level: 0
+
       - name: Install .NET SDK
         uses: actions/setup-dotnet@v4
         with:
