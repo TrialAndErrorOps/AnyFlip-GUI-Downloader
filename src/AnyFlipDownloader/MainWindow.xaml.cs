@@ -19,6 +19,8 @@ public partial class MainWindow : Window
     private static readonly Regex AnsiRegex = new(@"\x1B\[[0-?]*[ -/]*[@-~]", RegexOptions.Compiled);
     private static readonly Regex PercentRegex = new(@"(?<percent>\d{1,3})\s*%", RegexOptions.Compiled);
     private static readonly Regex CountRegex = new(@"\((?<current>\d+)\s*/\s*(?<total>\d+)\)", RegexOptions.Compiled);
+    private static readonly Regex ProgressGlyphRegex = new(@"[\u2500-\u259F\u00A6\u00AC]+", RegexOptions.Compiled);
+    private static readonly Regex WhitespaceRegex = new(@"\s+", RegexOptions.Compiled);
 
     private readonly DispatcherTimer _elapsedTimer;
     private readonly Stopwatch _stopwatch = new();
@@ -41,11 +43,13 @@ public partial class MainWindow : Window
 
     private void Paste_Click(object sender, RoutedEventArgs e)
     {
-        if (Clipboard.ContainsText())
+        if (!Clipboard.ContainsText())
         {
-            UrlTextBox.Text = Clipboard.GetText().Trim();
-            UrlTextBox.CaretIndex = UrlTextBox.Text.Length;
+            return;
         }
+
+        UrlTextBox.Text = Clipboard.GetText().Trim();
+        UrlTextBox.CaretIndex = UrlTextBox.Text.Length;
     }
 
     private void Browse_Click(object sender, RoutedEventArgs e)
@@ -92,7 +96,9 @@ public partial class MainWindow : Window
                 UseShellExecute = false,
                 CreateNoWindow = true,
                 RedirectStandardOutput = true,
-                RedirectStandardError = true
+                RedirectStandardError = true,
+                StandardOutputEncoding = Encoding.UTF8,
+                StandardErrorEncoding = Encoding.UTF8
             };
 
             if (!string.IsNullOrWhiteSpace(request.Title))
@@ -142,7 +148,7 @@ public partial class MainWindow : Window
 
             if (_lastPdfPath is null)
             {
-                DetailTextBlock.Text = "The downloader finished, but no new or changed PDF was detected. Check the activity log and output folder.";
+                DetailTextBlock.Text = "Finished, but no new or changed PDF was detected.";
                 OpenFolderButton.Visibility = Visibility.Visible;
                 ActivityExpander.IsExpanded = true;
                 AddActivity("Completed without detecting a new or changed PDF.");
@@ -183,10 +189,7 @@ public partial class MainWindow : Window
         }
     }
 
-    private void Cancel_Click(object sender, RoutedEventArgs e)
-    {
-        CancelDownload();
-    }
+    private void Cancel_Click(object sender, RoutedEventArgs e) => CancelDownload();
 
     private void OpenPdf_Click(object sender, RoutedEventArgs e)
     {
@@ -205,10 +208,7 @@ public partial class MainWindow : Window
         }
     }
 
-    private void ClearActivity_Click(object sender, RoutedEventArgs e)
-    {
-        ActivityTextBox.Clear();
-    }
+    private void ClearActivity_Click(object sender, RoutedEventArgs e) => ActivityTextBox.Clear();
 
     private void OnClosing(object? sender, CancelEventArgs e)
     {
@@ -384,14 +384,12 @@ public partial class MainWindow : Window
         }
     }
 
-    private Task DispatchCliLineAsync(string rawLine, bool isErrorStream)
-    {
-        return Dispatcher.InvokeAsync(() => HandleCliLine(rawLine, isErrorStream)).Task;
-    }
+    private Task DispatchCliLineAsync(string rawLine, bool isErrorStream) =>
+        Dispatcher.InvokeAsync(() => HandleCliLine(rawLine, isErrorStream)).Task;
 
     private void HandleCliLine(string rawLine, bool isErrorStream)
     {
-        var line = AnsiRegex.Replace(rawLine, string.Empty).Trim();
+        var line = SanitizeCliLine(rawLine);
         if (line.Length == 0)
         {
             return;
@@ -404,10 +402,10 @@ public partial class MainWindow : Window
             return;
         }
 
-        AddActivity(line);
-
-        if (isErrorStream || line.Contains("error", StringComparison.OrdinalIgnoreCase)
-                          || line.Contains("failed", StringComparison.OrdinalIgnoreCase))
+        var isError = isErrorStream
+                      || line.Contains("error", StringComparison.OrdinalIgnoreCase)
+                      || line.Contains("failed", StringComparison.OrdinalIgnoreCase);
+        if (isError)
         {
             _diagnostics.Enqueue(line);
         }
@@ -433,27 +431,55 @@ public partial class MainWindow : Window
 
         var downloading = line.Contains("Downloading", StringComparison.OrdinalIgnoreCase);
         var converting = line.Contains("Converting", StringComparison.OrdinalIgnoreCase);
-        if (!downloading && !converting)
+        if (downloading || converting)
         {
+            var hasProgress = TryParseProgress(line, out var rawPercent);
+            var detail = BuildProgressDetail(line, converting, hasProgress ? rawPercent : null);
+
+            SetStage(converting ? "Building PDF" : "Downloading pages", detail, indeterminate: !hasProgress);
+            if (hasProgress)
+            {
+                var mapped = converting ? 85 + (rawPercent * 0.15) : rawPercent * 0.85;
+                SetProgress(mapped);
+            }
+
+            // ponytail: progress lines are intentionally not copied to the log; the CLI redraws them constantly.
             return;
         }
 
-        if (TryParseProgress(line, out var rawPercent))
-        {
-            var mapped = converting
-                ? 85 + (rawPercent * 0.15)
-                : rawPercent * 0.85;
+        AddActivity(line);
+    }
 
-            SetStage(
-                converting ? "Building PDF" : "Downloading pages",
-                line,
-                indeterminate: false);
-            SetProgress(mapped);
-        }
-        else
+    private static string SanitizeCliLine(string rawLine)
+    {
+        var cleaned = AnsiRegex.Replace(rawLine, string.Empty)
+            .Replace("Â", string.Empty, StringComparison.Ordinal);
+        cleaned = ProgressGlyphRegex.Replace(cleaned, " ");
+
+        var characters = cleaned.Where(character => !char.IsControl(character) || character == '\t').ToArray();
+        return WhitespaceRegex.Replace(new string(characters), " ").Trim();
+    }
+
+    private static string BuildProgressDetail(string line, bool converting, double? percent)
+    {
+        var countMatch = CountRegex.Match(line);
+        if (countMatch.Success)
         {
-            SetStage(converting ? "Building PDF" : "Downloading pages", line, indeterminate: true);
+            var current = countMatch.Groups["current"].Value;
+            var total = countMatch.Groups["total"].Value;
+            return converting
+                ? $"Converting page {current} of {total}"
+                : $"Downloaded {current} of {total} pages";
         }
+
+        if (percent.HasValue)
+        {
+            return converting
+                ? $"Converting pages — {percent.Value:0}%"
+                : $"Downloading pages — {percent.Value:0}%";
+        }
+
+        return converting ? "Converting downloaded pages…" : "Downloading publication pages…";
     }
 
     private static bool TryParseProgress(string line, out double percent)
@@ -522,7 +548,7 @@ public partial class MainWindow : Window
 
     private void AddActivity(string text)
     {
-        ActivityTextBox.AppendText($"[{DateTime.Now:HH:mm:ss}] {text}{Environment.NewLine}");
+        ActivityTextBox.AppendText($"[{DateTime.Now:HH:mm:ss}] {SanitizeCliLine(text)}{Environment.NewLine}");
         ActivityTextBox.ScrollToEnd();
     }
 
@@ -576,10 +602,8 @@ public partial class MainWindow : Window
             .ToArray();
     }
 
-    private static void OpenPath(string path)
-    {
+    private static void OpenPath(string path) =>
         Process.Start(new ProcessStartInfo(path) { UseShellExecute = true });
-    }
 
     private void ShowValidationError(string message, System.Windows.Controls.Control control)
     {
@@ -593,12 +617,10 @@ public partial class MainWindow : Window
         return Directory.Exists(downloads) ? downloads : Environment.CurrentDirectory;
     }
 
-    private static string FormatElapsed(TimeSpan elapsed)
-    {
-        return elapsed.TotalHours >= 1
+    private static string FormatElapsed(TimeSpan elapsed) =>
+        elapsed.TotalHours >= 1
             ? $"{(int)elapsed.TotalHours:00}:{elapsed.Minutes:00}:{elapsed.Seconds:00}"
             : $"{elapsed.Minutes:00}:{elapsed.Seconds:00}";
-    }
 
     private readonly record struct DownloadRequest(Uri Url, string OutputFolder, string Title, int Threads, int ChunkSize);
     private readonly record struct PdfSnapshot(long Length, DateTime LastWriteUtc);
