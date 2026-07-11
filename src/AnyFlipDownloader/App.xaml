@@ -2,28 +2,28 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              StartupUri="MainWindow.xaml"
-             ThemeMode="Dark">
+             ThemeMode="Light">
     <Application.Resources>
-        <Color x:Key="AppBackgroundColor">#141B25</Color>
-        <Color x:Key="SurfaceColor">#1B2532</Color>
-        <Color x:Key="SurfaceElevatedColor">#222F3E</Color>
-        <Color x:Key="SurfaceHoverColor">#2B3B4D</Color>
-        <Color x:Key="FieldBackgroundColor">#17212D</Color>
-        <Color x:Key="ConsoleBackgroundColor">#111A24</Color>
-        <Color x:Key="BorderColor">#364A5F</Color>
-        <Color x:Key="BorderStrongColor">#58748F</Color>
-        <Color x:Key="TextPrimaryColor">#F7F9FC</Color>
-        <Color x:Key="TextSecondaryColor">#B2BFCC</Color>
-        <Color x:Key="TextTertiaryColor">#7E8FA0</Color>
-        <Color x:Key="AccentColor">#5C8FFF</Color>
-        <Color x:Key="AccentPressedColor">#467AE7</Color>
-        <Color x:Key="AccentSoftColor">#2E4E8E</Color>
-        <Color x:Key="SuccessColor">#49D49A</Color>
-        <Color x:Key="SuccessSoftColor">#204C3E</Color>
-        <Color x:Key="WarningColor">#F2BC69</Color>
-        <Color x:Key="DangerColor">#FF7883</Color>
-        <Color x:Key="DangerSoftColor">#573039</Color>
-        <Color x:Key="ProgressTrackColor">#2C3A49</Color>
+        <Color x:Key="AppBackgroundColor">#F3F5FA</Color>
+        <Color x:Key="SurfaceColor">#FFFFFF</Color>
+        <Color x:Key="SurfaceElevatedColor">#F8F9FC</Color>
+        <Color x:Key="SurfaceHoverColor">#F0F2F7</Color>
+        <Color x:Key="FieldBackgroundColor">#F8F9FC</Color>
+        <Color x:Key="ConsoleBackgroundColor">#111626</Color>
+        <Color x:Key="BorderColor">#E2E6EF</Color>
+        <Color x:Key="BorderStrongColor">#C9D1DF</Color>
+        <Color x:Key="TextPrimaryColor">#151B2C</Color>
+        <Color x:Key="TextSecondaryColor">#727B90</Color>
+        <Color x:Key="TextTertiaryColor">#9AA2B2</Color>
+        <Color x:Key="AccentColor">#6D5DFB</Color>
+        <Color x:Key="AccentPressedColor">#5848E8</Color>
+        <Color x:Key="AccentSoftColor">#EEEAFE</Color>
+        <Color x:Key="SuccessColor">#23855F</Color>
+        <Color x:Key="SuccessSoftColor">#E8F7F1</Color>
+        <Color x:Key="WarningColor">#B87318</Color>
+        <Color x:Key="DangerColor">#C93F52</Color>
+        <Color x:Key="DangerSoftColor">#FDECEE</Color>
+        <Color x:Key="ProgressTrackColor">#E8EBF2</Color>
 
         <SolidColorBrush x:Key="AppBackgroundBrush" Color="{StaticResource AppBackgroundColor}" />
         <SolidColorBrush x:Key="SurfaceBrush" Color="{StaticResource SurfaceColor}" />
@@ -47,9 +47,9 @@
         <SolidColorBrush x:Key="ProgressTrackBrush" Color="{StaticResource ProgressTrackColor}" />
 
         <LinearGradientBrush x:Key="AccentGradientBrush" StartPoint="0,0" EndPoint="1,1">
-            <GradientStop Color="#35C8BA" Offset="0" />
-            <GradientStop Color="#5C8FFF" Offset="0.58" />
-            <GradientStop Color="#9872F5" Offset="1" />
+            <GradientStop Color="#8A7BFF" Offset="0" />
+            <GradientStop Color="#6D5DFB" Offset="0.62" />
+            <GradientStop Color="#5848E8" Offset="1" />
         </LinearGradientBrush>
 
         <Style TargetType="{x:Type Window}">
@@ -91,10 +91,10 @@
             <Setter Property="Height" Value="40" />
             <Setter Property="MinWidth" Value="88" />
             <Setter Property="Padding" Value="16,0" />
-            <Setter Property="Background" Value="{StaticResource SurfaceElevatedBrush}" />
-            <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
+            <Setter Property="Background" Value="#F2F4F8" />
+            <Setter Property="BorderBrush" Value="#E1E5EC" />
             <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
+            <Setter Property="Foreground" Value="#4F586C" />
             <Setter Property="FontWeight" Value="SemiBold" />
             <Setter Property="Cursor" Value="Hand" />
             <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -106,8 +106,7 @@
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="9"
-                                SnapsToDevicePixels="True">
+                                CornerRadius="9">
                             <ContentPresenter Margin="{TemplateBinding Padding}"
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -115,18 +114,18 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="ButtonBorder" Property="Opacity" Value="0.9" />
+                                <Setter TargetName="ButtonBorder" Property="Background" Value="#E9ECF3" />
                                 <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="{StaticResource BorderStrongBrush}" />
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="ButtonBorder" Property="Opacity" Value="0.76" />
+                                <Setter TargetName="ButtonBorder" Property="Opacity" Value="0.78" />
                             </Trigger>
                             <Trigger Property="IsKeyboardFocused" Value="True">
                                 <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="{StaticResource AccentBrush}" />
                                 <Setter TargetName="ButtonBorder" Property="BorderThickness" Value="2" />
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
-                                <Setter TargetName="ButtonBorder" Property="Opacity" Value="0.38" />
+                                <Setter TargetName="ButtonBorder" Property="Opacity" Value="0.45" />
                                 <Setter Property="Cursor" Value="Arrow" />
                             </Trigger>
                         </ControlTemplate.Triggers>
@@ -146,7 +145,7 @@
 
         <Style x:Key="DangerButtonStyle" TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
             <Setter Property="Background" Value="{StaticResource DangerSoftBrush}" />
-            <Setter Property="BorderBrush" Value="#87515C" />
+            <Setter Property="BorderBrush" Value="#F2C8CE" />
             <Setter Property="Foreground" Value="{StaticResource DangerBrush}" />
         </Style>
 
@@ -175,8 +174,7 @@
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="9"
-                                Padding="{TemplateBinding Padding}"
-                                SnapsToDevicePixels="True">
+                                Padding="{TemplateBinding Padding}">
                             <ScrollViewer x:Name="PART_ContentHost"
                                           HorizontalScrollBarVisibility="Hidden"
                                           VerticalScrollBarVisibility="Hidden" />
@@ -189,11 +187,8 @@
                                 <Setter TargetName="TextBoxBorder" Property="BorderBrush" Value="{StaticResource AccentBrush}" />
                                 <Setter TargetName="TextBoxBorder" Property="BorderThickness" Value="2" />
                             </Trigger>
-                            <Trigger Property="IsReadOnly" Value="True">
-                                <Setter TargetName="TextBoxBorder" Property="Background" Value="{StaticResource ConsoleBackgroundBrush}" />
-                            </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
-                                <Setter TargetName="TextBoxBorder" Property="Opacity" Value="0.46" />
+                                <Setter TargetName="TextBoxBorder" Property="Opacity" Value="0.5" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -241,13 +236,8 @@
                             </Trigger>
                             <Trigger Property="IsChecked" Value="True">
                                 <Setter TargetName="Chevron" Property="RenderTransform">
-                                    <Setter.Value>
-                                        <RotateTransform Angle="180" />
-                                    </Setter.Value>
+                                    <Setter.Value><RotateTransform Angle="180" /></Setter.Value>
                                 </Setter>
-                            </Trigger>
-                            <Trigger Property="IsEnabled" Value="False">
-                                <Setter TargetName="HeaderBorder" Property="Opacity" Value="0.45" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -257,7 +247,7 @@
 
         <Style TargetType="Expander">
             <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
-            <Setter Property="Background" Value="{StaticResource FieldBackgroundBrush}" />
+            <Setter Property="Background" Value="{StaticResource SurfaceElevatedBrush}" />
             <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
             <Setter Property="BorderThickness" Value="1" />
             <Setter Property="Padding" Value="14,12" />
@@ -304,7 +294,7 @@
         </Style>
 
         <Style TargetType="ToolTip">
-            <Setter Property="Background" Value="{StaticResource SurfaceElevatedBrush}" />
+            <Setter Property="Background" Value="White" />
             <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
             <Setter Property="BorderBrush" Value="{StaticResource BorderStrongBrush}" />
             <Setter Property="BorderThickness" Value="1" />
