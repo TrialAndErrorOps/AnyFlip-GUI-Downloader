@@ -81,7 +81,7 @@ publish\AnyFlipDownloader.exe
 The workflow in `.github/workflows/build-windows.yml` performs the same verified build on a Windows runner and publishes both:
 
 - the self-contained Windows package
-- a ZIP of the complete checked-out source tree
+- `AnyFlipDownloader-source-v1.4.0.zip`, containing the complete checked-out source tree
 
 ## Third-party component
 
