@@ -3,100 +3,158 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="AnyFlip Downloader"
         Icon="Assets/App.ico"
-        Width="820"
+        Width="920"
         Height="760"
-        MinWidth="720"
-        MinHeight="660"
+        MinWidth="820"
+        MinHeight="700"
         WindowStartupLocation="CenterScreen"
         Background="{StaticResource AppBackgroundBrush}"
         UseLayoutRounding="True"
         SnapsToDevicePixels="True"
         Closing="OnClosing">
-    <ScrollViewer VerticalScrollBarVisibility="Auto"
-                  HorizontalScrollBarVisibility="Disabled"
-                  PanningMode="VerticalOnly">
-        <Grid MaxWidth="760" Margin="30,24,30,22">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="20" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="14" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="12" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="18" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
+    <Grid MaxWidth="880" Margin="22,18,22,16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="14" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="14" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="14" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="12" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
 
-                <Border Width="50" Height="50" CornerRadius="14" Background="{StaticResource AccentGradientBrush}">
-                    <Grid Margin="10">
-                        <Border Width="20" Height="25" CornerRadius="3"
-                                Background="#68FFFFFF"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Bottom" />
-                        <Border Width="21" Height="26" CornerRadius="3"
-                                Background="White"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Top">
-                            <StackPanel Margin="5,7,5,5">
-                                <Border Height="2" CornerRadius="1" Background="#6B7FD0" />
-                                <Border Height="2" CornerRadius="1" Background="#6B7FD0" Margin="0,4,0,0" />
-                                <Border Width="8" Height="2" CornerRadius="1" Background="#6B7FD0" Margin="0,4,0,0" HorizontalAlignment="Left" />
-                            </StackPanel>
-                        </Border>
-                    </Grid>
-                </Border>
+            <Border Width="44" Height="44" CornerRadius="12" Background="{StaticResource AccentGradientBrush}">
+                <Grid Margin="9">
+                    <Border Width="18" Height="22" CornerRadius="3"
+                            Background="#68FFFFFF"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Bottom" />
+                    <Border Width="19" Height="23" CornerRadius="3"
+                            Background="White"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top">
+                        <StackPanel Margin="4,6,4,4">
+                            <Border Height="2" CornerRadius="1" Background="#6B7FD0" />
+                            <Border Height="2" CornerRadius="1" Background="#6B7FD0" Margin="0,3,0,0" />
+                            <Border Width="7" Height="2" CornerRadius="1" Background="#6B7FD0" Margin="0,3,0,0" HorizontalAlignment="Left" />
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Border>
 
-                <StackPanel Grid.Column="2" VerticalAlignment="Center">
-                    <TextBlock Text="AnyFlip Downloader" FontSize="25" FontWeight="SemiBold" />
-                    <TextBlock Text="Create a PDF from an authorized AnyFlip publication."
-                               Style="{StaticResource MutedTextStyle}"
-                               Margin="0,3,0,0" />
+            <StackPanel Grid.Column="2" VerticalAlignment="Center">
+                <TextBlock Text="AnyFlip Downloader" FontSize="23" FontWeight="SemiBold" />
+                <TextBlock Text="Create a PDF from an authorized AnyFlip publication."
+                           Style="{StaticResource MutedTextStyle}"
+                           Margin="0,2,0,0" />
+            </StackPanel>
+
+            <Border Grid.Column="3"
+                    VerticalAlignment="Center"
+                    Background="{StaticResource SurfaceElevatedBrush}"
+                    BorderBrush="{StaticResource BorderBrush}"
+                    BorderThickness="1"
+                    CornerRadius="9"
+                    Padding="10,5">
+                <StackPanel Orientation="Horizontal">
+                    <Ellipse Width="7" Height="7" Fill="{StaticResource SuccessBrush}" Margin="0,0,7,0" VerticalAlignment="Center" />
+                    <TextBlock Text="CLI 0.1.14" FontSize="12" FontWeight="SemiBold" VerticalAlignment="Center" />
                 </StackPanel>
+            </Border>
+        </Grid>
 
-                <Border Grid.Column="3"
-                        VerticalAlignment="Center"
-                        Background="{StaticResource SurfaceElevatedBrush}"
-                        BorderBrush="{StaticResource BorderBrush}"
-                        BorderThickness="1"
-                        CornerRadius="10"
-                        Padding="11,6">
-                    <StackPanel Orientation="Horizontal">
-                        <Ellipse Width="7" Height="7" Fill="{StaticResource SuccessBrush}" Margin="0,0,7,0" VerticalAlignment="Center" />
-                        <TextBlock Text="CLI 0.1.14" FontSize="12" FontWeight="SemiBold" VerticalAlignment="Center" />
+        <Border Grid.Row="2"
+                Background="{StaticResource SurfaceElevatedBrush}"
+                BorderBrush="{StaticResource BorderBrush}"
+                BorderThickness="1"
+                CornerRadius="14"
+                Padding="18,16">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="13" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="12" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Border Width="38" Height="38" CornerRadius="11" Background="{StaticResource AccentSoftBrush}" VerticalAlignment="Center">
+                        <Ellipse Width="10" Height="10" Fill="{StaticResource AccentBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <StackPanel Grid.Column="2" VerticalAlignment="Center">
+                        <TextBlock x:Name="StageTextBlock" Text="Ready" FontSize="16" FontWeight="SemiBold" />
+                        <TextBlock x:Name="DetailTextBlock"
+                                   Text="Paste a publication URL to begin."
+                                   Style="{StaticResource MutedTextStyle}"
+                                   Margin="0,3,0,0"
+                                   TextTrimming="CharacterEllipsis"
+                                   TextWrapping="NoWrap" />
                     </StackPanel>
-                </Border>
+                    <StackPanel Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="18,0,0,0">
+                        <TextBlock x:Name="PercentTextBlock" Text="0%" FontSize="22" FontWeight="SemiBold" HorizontalAlignment="Right" />
+                        <TextBlock x:Name="ElapsedTextBlock" Text="00:00" Style="{StaticResource QuietTextStyle}" HorizontalAlignment="Right" Margin="0,2,0,0" />
+                    </StackPanel>
+                </Grid>
+                <ProgressBar x:Name="DownloadProgressBar"
+                             Grid.Row="2"
+                             Minimum="0"
+                             Maximum="100"
+                             Value="0" />
             </Grid>
+        </Border>
 
-            <Border Grid.Row="2" Style="{StaticResource CardStyle}">
-                <StackPanel>
-                    <TextBlock Text="Download publication" FontSize="19" FontWeight="SemiBold" />
-                    <TextBlock Text="Paste the publication link, choose a destination, and download the finished PDF."
-                               Style="{StaticResource MutedTextStyle}"
-                               Margin="0,4,0,0" />
+        <Border Grid.Row="4" Style="{StaticResource CardStyle}" Padding="20,16">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="14" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="14" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="12" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
 
-                    <Grid Margin="0,22,0,7">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="AnyFlip URL" Style="{StaticResource FieldLabelStyle}" Margin="0" />
-                        <TextBlock Grid.Column="2"
-                                   Text="Example: anyflip.com/abcd/efgh"
-                                   Style="{StaticResource QuietTextStyle}"
-                                   FontSize="12"
-                                   VerticalAlignment="Center" />
-                    </Grid>
-                    <Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel>
+                        <TextBlock Text="Download publication" FontSize="18" FontWeight="SemiBold" />
+                        <TextBlock Text="Enter the link and choose where the finished PDF should be saved."
+                                   Style="{StaticResource MutedTextStyle}"
+                                   Margin="0,3,0,0" />
+                    </StackPanel>
+                    <TextBlock Grid.Column="1"
+                               Text="Example: anyflip.com/abcd/efgh"
+                               Style="{StaticResource QuietTextStyle}"
+                               FontSize="12"
+                               VerticalAlignment="Bottom" />
+                </Grid>
+
+                <Grid Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="6" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="AnyFlip URL" Style="{StaticResource FieldLabelStyle}" Margin="0" />
+                    <Grid Grid.Row="2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="10" />
@@ -105,180 +163,148 @@
                         <TextBox x:Name="UrlTextBox"
                                  ToolTip="Example: https://anyflip.com/abcd/efgh/"
                                  AutomationProperties.Name="AnyFlip publication URL" />
-                        <Button Grid.Column="2" Content="Paste" MinWidth="84" Click="Paste_Click" />
+                        <Button Grid.Column="2" Content="Paste" MinWidth="82" Click="Paste_Click" />
                     </Grid>
+                </Grid>
 
-                    <TextBlock Text="Save to" Style="{StaticResource FieldLabelStyle}" Margin="0,18,0,7" />
+                <Grid Grid.Row="4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.35*" />
+                        <ColumnDefinition Width="16" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+
                     <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="10" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <TextBox x:Name="OutputFolderTextBox" AutomationProperties.Name="Output folder" />
-                        <Button Grid.Column="2" Content="Browse…" MinWidth="84" Click="Browse_Click" />
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="6" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Save to" Style="{StaticResource FieldLabelStyle}" Margin="0" />
+                        <Grid Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="10" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="OutputFolderTextBox" AutomationProperties.Name="Output folder" />
+                            <Button Grid.Column="2" Content="Browse…" MinWidth="82" Click="Browse_Click" />
+                        </Grid>
                     </Grid>
 
-                    <Grid Margin="0,18,0,7">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="PDF title" Style="{StaticResource FieldLabelStyle}" Margin="0" />
-                        <TextBlock Grid.Column="2" Text="Optional" Style="{StaticResource QuietTextStyle}" FontSize="12" VerticalAlignment="Center" />
-                    </Grid>
-                    <TextBox x:Name="TitleTextBox"
-                             ToolTip="Leave blank to use the publication title."
-                             AutomationProperties.Name="Optional PDF title" />
-
-                    <Expander Header="Advanced settings" Margin="0,18,0,0">
+                    <Grid Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="6" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="16" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="PDF title" Style="{StaticResource FieldLabelStyle}" Margin="0" />
+                            <TextBlock Grid.Column="1" Text="Optional" Style="{StaticResource QuietTextStyle}" FontSize="12" />
+                        </Grid>
+                        <TextBox Grid.Row="2"
+                                 x:Name="TitleTextBox"
+                                 ToolTip="Leave blank to use the publication title."
+                                 AutomationProperties.Name="Optional PDF title" />
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Row="6">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Expander Header="Advanced settings" VerticalAlignment="Center">
+                        <Grid Width="350">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="14" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                             <StackPanel>
                                 <TextBlock Text="Threads" Style="{StaticResource FieldLabelStyle}" />
                                 <TextBox x:Name="ThreadsTextBox" Text="4" AutomationProperties.Name="Download threads" />
-                                <TextBlock Text="1–32 simultaneous workers"
-                                           Style="{StaticResource QuietTextStyle}"
-                                           FontSize="12"
-                                           Margin="0,5,0,0" />
                             </StackPanel>
                             <StackPanel Grid.Column="2">
                                 <TextBlock Text="Chunk size" Style="{StaticResource FieldLabelStyle}" />
                                 <TextBox x:Name="ChunkSizeTextBox" Text="10" AutomationProperties.Name="PDF chunk size" />
-                                <TextBlock Text="1–1000 pages per chunk"
-                                           Style="{StaticResource QuietTextStyle}"
-                                           FontSize="12"
-                                           Margin="0,5,0,0" />
                             </StackPanel>
                         </Grid>
                     </Expander>
 
-                    <Grid Margin="0,22,0,0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="10" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="10" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                        <Button x:Name="OpenPdfButton"
+                                Content="Open PDF"
+                                Click="OpenPdf_Click"
+                                Visibility="Collapsed"
+                                Margin="0,0,8,0" />
+                        <Button x:Name="OpenFolderButton"
+                                Content="Open folder"
+                                Click="OpenFolder_Click"
+                                Visibility="Collapsed"
+                                Margin="0,0,8,0" />
+                        <Button x:Name="CancelButton"
+                                Content="Cancel"
+                                Style="{StaticResource DangerButtonStyle}"
+                                Click="Cancel_Click"
+                                IsEnabled="False"
+                                Margin="0,0,8,0" />
                         <Button x:Name="DownloadButton"
                                 Content="Download PDF"
                                 Style="{StaticResource PrimaryButtonStyle}"
                                 Click="Download_Click"
                                 IsDefault="True" />
-                        <Button x:Name="CancelButton"
-                                Grid.Column="2"
-                                Content="Cancel"
-                                Style="{StaticResource DangerButtonStyle}"
-                                Click="Cancel_Click"
-                                IsEnabled="False" />
-                        <Button x:Name="OpenPdfButton"
-                                Grid.Column="4"
-                                Content="Open PDF"
-                                Click="OpenPdf_Click"
-                                Visibility="Collapsed" />
-                        <Button x:Name="OpenFolderButton"
-                                Grid.Column="6"
-                                Content="Open folder"
-                                Click="OpenFolder_Click"
-                                Visibility="Collapsed" />
-                    </Grid>
-                </StackPanel>
-            </Border>
-
-            <Border Grid.Row="4"
-                    Background="{StaticResource SurfaceElevatedBrush}"
-                    BorderBrush="{StaticResource BorderBrush}"
-                    BorderThickness="1"
-                    CornerRadius="14"
-                    Padding="20">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="15" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="12" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <Border Width="38" Height="38" CornerRadius="11" Background="{StaticResource AccentSoftBrush}" VerticalAlignment="Center">
-                            <Ellipse Width="10" Height="10" Fill="{StaticResource AccentBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                        </Border>
-                        <StackPanel Grid.Column="2" VerticalAlignment="Center">
-                            <TextBlock x:Name="StageTextBlock" Text="Ready" FontSize="16" FontWeight="SemiBold" />
-                            <TextBlock x:Name="DetailTextBlock"
-                                       Text="Paste a publication URL to begin."
-                                       Style="{StaticResource MutedTextStyle}"
-                                       Margin="0,3,0,0"
-                                       TextWrapping="Wrap" />
-                        </StackPanel>
-                        <StackPanel Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="18,0,0,0">
-                            <TextBlock x:Name="PercentTextBlock" Text="0%" FontSize="22" FontWeight="SemiBold" HorizontalAlignment="Right" />
-                            <TextBlock x:Name="ElapsedTextBlock" Text="00:00" Style="{StaticResource QuietTextStyle}" HorizontalAlignment="Right" Margin="0,2,0,0" />
-                        </StackPanel>
-                    </Grid>
-                    <ProgressBar x:Name="DownloadProgressBar"
-                                 Grid.Row="2"
-                                 Minimum="0"
-                                 Maximum="100"
-                                 Value="0" />
+                    </StackPanel>
                 </Grid>
-            </Border>
-
-            <Expander x:Name="ActivityExpander" Grid.Row="6" Header="Activity log">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="10" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <TextBox x:Name="ActivityTextBox"
-                             Height="145"
-                             Padding="12,10"
-                             IsReadOnly="True"
-                             AcceptsReturn="True"
-                             TextWrapping="NoWrap"
-                             VerticalContentAlignment="Top"
-                             VerticalScrollBarVisibility="Auto"
-                             HorizontalScrollBarVisibility="Auto"
-                             FontFamily="Cascadia Mono, Consolas"
-                             FontSize="12"
-                             Background="{StaticResource ConsoleBackgroundBrush}"
-                             AutomationProperties.Name="Downloader activity log" />
-                    <Button Grid.Row="2"
-                            Content="Clear log"
-                            Style="{StaticResource TextButtonStyle}"
-                            HorizontalAlignment="Right"
-                            Click="ClearActivity_Click" />
-                </Grid>
-            </Expander>
-
-            <Grid Grid.Row="8">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Use only for publications you own or are authorized to download."
-                           Style="{StaticResource QuietTextStyle}"
-                           FontSize="11.5"
-                           TextWrapping="Wrap" />
-                <TextBlock Grid.Column="1"
-                           Text="Bundled CLI licensed under GPL-3.0"
-                           Style="{StaticResource QuietTextStyle}"
-                           FontSize="11.5"
-                           Margin="18,0,0,0" />
             </Grid>
+        </Border>
+
+        <Expander x:Name="ActivityExpander" Grid.Row="6" Header="Activity log">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="6" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBox x:Name="ActivityTextBox"
+                         Height="96"
+                         Padding="12,9"
+                         IsReadOnly="True"
+                         AcceptsReturn="True"
+                         TextWrapping="NoWrap"
+                         VerticalContentAlignment="Top"
+                         VerticalScrollBarVisibility="Auto"
+                         HorizontalScrollBarVisibility="Auto"
+                         FontFamily="Cascadia Mono, Consolas"
+                         FontSize="11.5"
+                         Background="{StaticResource ConsoleBackgroundBrush}"
+                         AutomationProperties.Name="Downloader activity log" />
+                <Button Grid.Row="2"
+                        Content="Clear log"
+                        Style="{StaticResource TextButtonStyle}"
+                        HorizontalAlignment="Right"
+                        Click="ClearActivity_Click" />
+            </Grid>
+        </Expander>
+
+        <Grid Grid.Row="8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Use only for publications you own or are authorized to download."
+                       Style="{StaticResource QuietTextStyle}"
+                       FontSize="11"
+                       TextWrapping="Wrap" />
+            <TextBlock Grid.Column="1"
+                       Text="Bundled CLI licensed under GPL-3.0"
+                       Style="{StaticResource QuietTextStyle}"
+                       FontSize="11"
+                       Margin="18,0,0,0" />
         </Grid>
-    </ScrollViewer>
+    </Grid>
 </Window>
