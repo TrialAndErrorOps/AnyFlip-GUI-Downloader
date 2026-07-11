@@ -11,9 +11,9 @@
     <Product>AnyFlip Downloader</Product>
     <Description>Download an authorized AnyFlip publication as a PDF.</Description>
     <Authors>TrialAndErrorOps</Authors>
-    <Version>1.1.0</Version>
-    <FileVersion>1.1.0.0</FileVersion>
-    <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <Version>1.2.0</Version>
+    <FileVersion>1.2.0.0</FileVersion>
+    <AssemblyVersion>1.2.0.0</AssemblyVersion>
     <ApplicationIcon>Assets\App.ico</ApplicationIcon>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <SelfContained>true</SelfContained>
