@@ -4,26 +4,26 @@
              StartupUri="MainWindow.xaml"
              ThemeMode="Dark">
     <Application.Resources>
-        <Color x:Key="AppBackgroundColor">#0B1016</Color>
-        <Color x:Key="SurfaceColor">#111923</Color>
-        <Color x:Key="SurfaceElevatedColor">#151F2B</Color>
-        <Color x:Key="SurfaceHoverColor">#1B2836</Color>
-        <Color x:Key="FieldBackgroundColor">#0D141C</Color>
-        <Color x:Key="ConsoleBackgroundColor">#091017</Color>
-        <Color x:Key="BorderColor">#263545</Color>
-        <Color x:Key="BorderStrongColor">#3A4D61</Color>
-        <Color x:Key="TextPrimaryColor">#F4F7FA</Color>
-        <Color x:Key="TextSecondaryColor">#9AA8B7</Color>
-        <Color x:Key="TextTertiaryColor">#697887</Color>
-        <Color x:Key="AccentColor">#4D83FF</Color>
-        <Color x:Key="AccentPressedColor">#376FEA</Color>
-        <Color x:Key="AccentSoftColor">#263F79</Color>
-        <Color x:Key="SuccessColor">#43C38B</Color>
-        <Color x:Key="SuccessSoftColor">#173E32</Color>
-        <Color x:Key="WarningColor">#EAB464</Color>
-        <Color x:Key="DangerColor">#F26D78</Color>
-        <Color x:Key="DangerSoftColor">#4A242A</Color>
-        <Color x:Key="ProgressTrackColor">#202D3A</Color>
+        <Color x:Key="AppBackgroundColor">#141B25</Color>
+        <Color x:Key="SurfaceColor">#1B2532</Color>
+        <Color x:Key="SurfaceElevatedColor">#222F3E</Color>
+        <Color x:Key="SurfaceHoverColor">#2B3B4D</Color>
+        <Color x:Key="FieldBackgroundColor">#17212D</Color>
+        <Color x:Key="ConsoleBackgroundColor">#111A24</Color>
+        <Color x:Key="BorderColor">#364A5F</Color>
+        <Color x:Key="BorderStrongColor">#58748F</Color>
+        <Color x:Key="TextPrimaryColor">#F7F9FC</Color>
+        <Color x:Key="TextSecondaryColor">#B2BFCC</Color>
+        <Color x:Key="TextTertiaryColor">#7E8FA0</Color>
+        <Color x:Key="AccentColor">#5C8FFF</Color>
+        <Color x:Key="AccentPressedColor">#467AE7</Color>
+        <Color x:Key="AccentSoftColor">#2E4E8E</Color>
+        <Color x:Key="SuccessColor">#49D49A</Color>
+        <Color x:Key="SuccessSoftColor">#204C3E</Color>
+        <Color x:Key="WarningColor">#F2BC69</Color>
+        <Color x:Key="DangerColor">#FF7883</Color>
+        <Color x:Key="DangerSoftColor">#573039</Color>
+        <Color x:Key="ProgressTrackColor">#2C3A49</Color>
 
         <SolidColorBrush x:Key="AppBackgroundBrush" Color="{StaticResource AppBackgroundColor}" />
         <SolidColorBrush x:Key="SurfaceBrush" Color="{StaticResource SurfaceColor}" />
@@ -47,9 +47,9 @@
         <SolidColorBrush x:Key="ProgressTrackBrush" Color="{StaticResource ProgressTrackColor}" />
 
         <LinearGradientBrush x:Key="AccentGradientBrush" StartPoint="0,0" EndPoint="1,1">
-            <GradientStop Color="#20BFB8" Offset="0" />
-            <GradientStop Color="#497FFF" Offset="0.58" />
-            <GradientStop Color="#8256E8" Offset="1" />
+            <GradientStop Color="#35C8BA" Offset="0" />
+            <GradientStop Color="#5C8FFF" Offset="0.58" />
+            <GradientStop Color="#9872F5" Offset="1" />
         </LinearGradientBrush>
 
         <Style TargetType="{x:Type Window}">
@@ -146,7 +146,7 @@
 
         <Style x:Key="DangerButtonStyle" TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
             <Setter Property="Background" Value="{StaticResource DangerSoftBrush}" />
-            <Setter Property="BorderBrush" Value="#74505A" />
+            <Setter Property="BorderBrush" Value="#87515C" />
             <Setter Property="Foreground" Value="{StaticResource DangerBrush}" />
         </Style>
 
