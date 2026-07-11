@@ -1,0 +1,5 @@
+bin/
+obj/
+publish/
+package/
+src/AnyFlipDownloader/Tools/anyflip-downloader.exe

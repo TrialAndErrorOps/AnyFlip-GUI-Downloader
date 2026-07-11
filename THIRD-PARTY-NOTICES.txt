@@ -1,0 +1,15 @@
+AnyFlip Downloader includes the following third-party command-line tool:
+
+anyflip-downloader v0.1.14
+Copyright its contributors
+Project: https://github.com/Lofter1/anyflip-downloader
+Release source: https://github.com/Lofter1/anyflip-downloader/tree/v0.1.14
+License: GNU General Public License v3.0
+
+The Windows AMD64 release archive used by this build is:
+anyflip-downloader_0.1.14_windows_amd64.tar.gz
+SHA-256: 91d514615c8e07600bf6f98870620456263a6a7f7d5d36724f16a86702fbd0c7
+
+The build package includes the upstream GPL license and corresponding v0.1.14 source archive.
+
+Use this application only for publications you own or are authorized to download.
