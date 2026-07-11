@@ -9,11 +9,11 @@
     <RootNamespace>AnyFlipDownloader</RootNamespace>
     <AssemblyTitle>AnyFlip Downloader GUI</AssemblyTitle>
     <Product>AnyFlip Downloader GUI</Product>
-    <Description>Download an authorized AnyFlip publication as a PDF through a modern graphical interface.</Description>
+    <Description>Download an authorized AnyFlip publication as a PDF through a graphical interface.</Description>
     <Authors>TrialAndErrorOps</Authors>
-    <Version>1.3.0</Version>
-    <FileVersion>1.3.0.0</FileVersion>
-    <AssemblyVersion>1.3.0.0</AssemblyVersion>
+    <Version>1.4.0</Version>
+    <FileVersion>1.4.0.0</FileVersion>
+    <AssemblyVersion>1.4.0.0</AssemblyVersion>
     <ApplicationIcon>Assets\App.ico</ApplicationIcon>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <SelfContained>true</SelfContained>
